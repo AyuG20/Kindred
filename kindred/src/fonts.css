@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --paper: #F1EFE6;
+  --paper-alt: #E7E2D3;
+  --card: #FBF9F2;
+  --ink: #23302A;
+  --ink-soft: #5C6960;
+  --moss: #45604F;
+  --moss-dark: #2E4330;
+  --marigold: #E2A339;
+  --periwinkle: #5568D6;
+  --line: #D9D3C1;
+  --white: #FFFDF8;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-utility: 'IBM Plex Mono', ui-monospace, Consolas, monospace;
+
+  --sans: var(--font-body);
+  --heading: var(--font-display);
+  --mono: var(--font-utility);
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+.logo,
+.step-label {
+  font-family: var(--font-display);
+}
+
+code,
+.counter,
+.badge,
+.timestamp {
+  font-family: var(--font-utility);
+}
+
+.font-sans,
+.font-body {
+  font-family: var(--font-body) !important;
+}
+
+.font-heading,
+.font-display {
+  font-family: var(--font-display) !important;
+}
+
+.font-mono,
+.font-utility {
+  font-family: var(--font-utility) !important;
+}

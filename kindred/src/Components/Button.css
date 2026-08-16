@@ -1,0 +1,67 @@
+.kindred-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 500 0.95rem/1 var(--font-body);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  text-decoration: none;
+}
+
+.kindred-button:hover {
+  transform: translateY(-1px);
+}
+
+.kindred-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.kindred-button--primary {
+  background: var(--moss);
+  color: var(--white);
+}
+
+.kindred-button--primary:hover {
+  background: var(--moss-dark);
+}
+
+.kindred-button--secondary {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.kindred-button--secondary:hover {
+  background: var(--paper-alt);
+}
+
+.kindred-button--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: transparent;
+}
+
+.kindred-button--ghost:hover {
+  background: rgba(35, 48, 42, 0.08);
+}
+
+.kindred-button--sm {
+  min-height: 36px;
+  padding: 0 1rem;
+}
+
+.kindred-button--md {
+  min-height: 44px;
+}
+
+.kindred-button--lg {
+  min-height: 52px;
+  padding: 0 1.5rem;
+}
