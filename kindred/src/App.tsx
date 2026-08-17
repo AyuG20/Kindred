@@ -6,9 +6,13 @@ import { ProfileDetails } from "./Pages/ProfileDetails/ProfileDetails";
 
 
 import { OnboardingRoute } from "./Routes/OnboardingRoute";
+import Home  from "./Pages/LandingPage/Home";
+import { AppShell } from "./Layout/AppShell";
 
 const App = () => {
   return (
+
+    
     <Routes>
 
       {/* Public */}
@@ -17,8 +21,12 @@ const App = () => {
         element={<Authenticate />}
       />
 
+      <Route element={<AppShell/>}>
+        <Route path="/" element={<Home/>}></Route>
+      </Route>
+
       {/* Onboarding */}
-      <Route element={<OnboardingRoute />}>
+      {/* <Route element={<OnboardingRoute />}> */}
 
         <Route
           path="/onboarding/interests"
@@ -30,13 +38,13 @@ const App = () => {
           element={<ProfileDetails />}
         />
 
-      </Route>
+      {/* </Route> */}
 
 
       {/* Default */}
       <Route
         path="/"
-        element={<Navigate to="/auth" replace />}
+        element={<Navigate to="/" replace />}
       />
 
       <Route

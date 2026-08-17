@@ -1,0 +1,56 @@
+.steps-grid {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+}
+
+.step-card {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+   border: 1px solid var(--ink);
+}
+
+.step-card__number {
+  display: block;
+  margin-bottom: 8px;
+
+  font-family: Georgia, serif;
+  font-size: 26px;
+  line-height: 1;
+
+  color: #dfa12f;
+}
+
+.step-card__title {
+  margin: 0 0 8px;
+
+  font-family: Georgia, serif;
+  font-size: 17px;
+
+  color: var(--ink);
+}
+
+.step-card__description {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: var(--ink-soft);
+}
+
+@media (max-width: 768px) {
+  .steps-grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step-card {
+    width: 100%;
+  }
+}

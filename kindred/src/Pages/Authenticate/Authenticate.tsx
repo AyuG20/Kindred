@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import { Button } from "../../Components/Button";
-import { Input } from "../../Components/Input";
+import { Button } from "../../Components/Button/Button";
+import { Input } from "../../Components/Input/Input";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
 import { useNavigate } from "react-router-dom";
-import {
-  clearError,
-  finishOnboarding,
-  loginUser,
-  logout,
-  signupUser,
-  startOnboarding,
-} from "../../Redux/Auth/authSlice";
+import { finishOnboarding, setAuthUser, startOnboarding } from "../../Redux/Auth/authSlice";
 import { authTexts } from "./authTexts";
 import "./Authenticate.css";
 import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus";
+import {
+  useLoginMutation,
+  useSignupMutation,
+} from "../../Redux/Auth/authQueries";
 
 export const Authenticate = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -28,10 +25,8 @@ export const Authenticate = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const { isAuthenticated, status, error } = useAppSelector(
-    (state) => state.auth,
-  );
+  const loginMutation = useLoginMutation();
+  const registerMutation = useSignupMutation();
 
   const formTitle = isRegister ? authTexts.signUpTitle : authTexts.loginTitle;
 
@@ -39,56 +34,61 @@ export const Authenticate = () => {
 
   const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(clearError());
 
     if (isRegister) {
-      const result = await dispatch(
-        signupUser({
+      try {
+        const result = await registerMutation.mutateAsync({
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
           password: user.password,
-        }),
-      );
+        });
 
-      console.log("Signup result:", result);
+        dispatch(setAuthUser(result.user));
+        console.log("Signup result:", result);
 
-      if (signupUser.fulfilled.match(result)) {
-        const onboardingStatus = result.payload.user.onboardingStatus;
+        const onboardingStatus = result.user.onboardingStatus;
+
         dispatch(startOnboarding());
 
         const onboardingRoute = getOnboardingRoute(onboardingStatus);
+
         navigate(onboardingRoute, {
           replace: true,
         });
+
+        setUser({
+          firstName: "",
+          lastName: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
+      } catch (error) {
+        console.error("Signup failed:", error);
       }
-      setUser({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
 
       return;
     }
 
-    const result = await dispatch(
-      loginUser({
+    try {
+      const result = await loginMutation.mutateAsync({
         email: user.email,
         password: user.password,
-      }),
-    );
+      });
 
-    if (loginUser.fulfilled.match(result)) {
-      const onboardingStatus = result.payload.user.onboardingStatus;
+      dispatch(setAuthUser(result.user));
 
-      if (onboardingStatus == "COMPLETED") {
+      const onboardingStatus = result.user.onboardingStatus;
+
+      if (onboardingStatus === "COMPLETED") {
         dispatch(finishOnboarding());
 
         const onboardingRoute = getOnboardingRoute("COMPLETED");
 
-        navigate(onboardingRoute, { replace: true });
+        navigate(onboardingRoute, {
+          replace: true,
+        });
       } else {
         dispatch(startOnboarding());
 
@@ -98,15 +98,17 @@ export const Authenticate = () => {
           replace: true,
         });
       }
-    }
 
-    setUser({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+      setUser({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
   return (
@@ -208,7 +210,13 @@ export const Authenticate = () => {
           />
         )}
 
-        {error && <p className="login-error">{error}</p>}
+        {isRegister
+          ? registerMutation.isError && (
+              <p className="login-error">{registerMutation.error?.message}</p>
+            )
+          : loginMutation.isError && (
+              <p className="login-error">{loginMutation.error?.message}</p>
+            )}
 
         <div className="login-form__footer">
           {!isRegister && (

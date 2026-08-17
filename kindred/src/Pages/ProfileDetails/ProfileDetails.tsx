@@ -1,6 +1,6 @@
-import { Button } from "../../Components/Button";
-import { Heading } from "../../Components/Heading";
-import { Input } from "../../Components/Input";
+import { Button } from "../../Components/Button/Button";
+import { Heading } from "../../Components/Heading/Heading";
+import { Input } from "../../Components/Input/Input";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../ProfileDetails/ProfileDetails.css";

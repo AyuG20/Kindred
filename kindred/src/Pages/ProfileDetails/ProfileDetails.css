@@ -178,16 +178,10 @@
    ========================================= */
 
 .profile-details-footer {
-  width: 100%;
-
   display: flex;
+  justify-content: flex-end;
 
-  justify-content: space-between;
-  align-items: center;
-
-  gap: 1rem;
-
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
 }
 
 .profile-back-button {

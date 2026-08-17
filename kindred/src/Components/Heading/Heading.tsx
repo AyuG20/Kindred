@@ -1,4 +1,4 @@
-import '../Components/Heading.css';
+import './Heading.css';
 
 export const Heading = ({stepTitle, title, description}: {stepTitle: string, title: string, description: string}) => {
     return (
