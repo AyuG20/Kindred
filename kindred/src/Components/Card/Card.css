@@ -1,0 +1,32 @@
+.kindred-card {
+  width: 100%;
+  max-width: 100%;
+  padding: 2rem;
+  border-radius: 30px;
+  background: var(--card);
+  border: 1px solid transparent;
+  box-shadow: 0 42px 80px rgba(0, 0, 0, 0.06);
+}
+
+.kindred-card--elevated {
+  border-color: rgba(35, 48, 42, 0.1);
+}
+
+.kindred-card__header {
+  margin-bottom: 1.4rem;
+}
+
+.kindred-card__header h2 {
+  margin: 0;
+  font: 700 2rem/1.05 var(--font-display);
+  color: var(--ink);
+}
+
+.kindred-card__body {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.kindred-card__footer {
+  margin-top: 1.5rem;
+}

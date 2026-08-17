@@ -1,0 +1,31 @@
+.heading-frame-header__step {
+  margin: 0;
+
+  font: 500 0.8rem/1.6 var(--font-body);
+
+  color: var(--ink-soft);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.heading-frame-header__title {
+  margin: 0;
+  font: 700 1.8rem/1.15 var(--font-display);
+  color: var(--ink);
+}
+
+@media (max-width: 480px) {
+  .heading-frame-header__title {
+    font-size: 1.5rem;
+    white-space: nowrap;
+  }
+}
+
+.heading-frame-header__copy {
+  margin: 0;
+
+  font: 500 0.95rem/1.6 var(--font-body);
+
+  color: var(--ink-soft);
+}

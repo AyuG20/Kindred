@@ -1,0 +1,430 @@
+.banner-container {
+  width: 100%;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+
+  gap: 48px;
+  padding: 56px 32px;
+}
+
+
+/* =========================================
+   LEFT / HEADING
+   ========================================= */
+
+.banner-content {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  text-align: left;
+}
+
+.banner-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  margin-top: 20px;
+  margin-left: 0;
+  margin-right: 0;
+
+  width: fit-content;
+  max-width: 100%;
+}
+
+.banner-button-get-started,
+.banner-button-how-it-works {
+  width: auto;
+  min-width: 0;
+
+  white-space: nowrap;
+  flex-shrink: 1;
+}
+
+/* Heading component itself */
+
+.banner-content .heading-frame-header {
+  width: 100%;
+  max-width: 520px;
+
+  text-align: left;
+}
+
+.banner-content .heading-frame-header__step {
+  display: block;
+
+  width: 100%;
+
+  margin-bottom: 12px;
+
+  text-align: left;
+}
+
+.banner-content .heading-frame-header__title {
+  width: 100%;
+
+  margin: 0;
+
+  text-align: left;
+
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+.banner-content .heading-frame-header__copy {
+  width: 100%;
+
+  margin-top: 16px;
+
+  text-align: left;
+}
+
+
+/* =========================================
+   RIGHT VISUAL
+   ========================================= */
+
+.banner-visual {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 320px;
+
+  box-sizing: border-box;
+
+  border-radius: 16px;
+
+  background: var(--paper-alt);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   CONNECTION CARDS
+   ========================================= */
+
+.connection-card {
+  position: absolute;
+
+  width: 110px;
+
+  padding: 8px 8px 12px;
+
+  box-sizing: border-box;
+
+  background: var(--card);
+
+  border-radius: 9px;
+
+  box-shadow:
+    0 8px 16px rgba(35, 48, 42, 0.08),
+    0 2px 5px rgba(35, 48, 42, 0.06);
+
+  text-align: center;
+
+  z-index: 2;
+}
+
+.card-image {
+  width: 100%;
+  height: 78px;
+
+  overflow: hidden;
+
+  border-radius: 6px;
+}
+
+.card-image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.connection-card span {
+  display: block;
+
+  margin-top: 7px;
+
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.2;
+
+  color: var(--ink-soft);
+
+  text-align: center;
+}
+
+
+/* =========================================
+   CARD POSITIONS
+   ========================================= */
+
+.card-one {
+  top: 24px;
+  left: 18px;
+
+  transform: rotate(-4deg);
+}
+
+.card-two {
+  top: 58px;
+  right: 20px;
+
+  transform: rotate(3deg);
+}
+
+.card-three {
+  bottom: 28px;
+  left: 60px;
+
+  transform: rotate(-2deg);
+}
+
+
+/* =========================================
+   CONNECTION LINES
+   ========================================= */
+
+.connection-line {
+  position: absolute;
+
+  height: 1px;
+
+  background: rgba(219, 120, 160, 0.65);
+
+  transform-origin: left center;
+
+  z-index: 1;
+}
+
+.line-one {
+  width: 115px;
+
+  top: 82px;
+  left: 105px;
+
+  transform: rotate(8deg);
+}
+
+.line-two {
+  width: 105px;
+
+  top: 180px;
+  left: 115px;
+
+  transform: rotate(115deg);
+}
+
+
+/* =========================================
+   CONNECTION DOTS
+   ========================================= */
+
+.connection-dot {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #dfa12f;
+
+  z-index: 3;
+}
+
+.dot-one {
+  top: 10px;
+  left: 62px;
+}
+
+.dot-two {
+  top: 28px;
+  right: 68px;
+}
+
+.dot-three {
+  top: 156px;
+  left: 106px;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 900px) {
+  .banner-container {
+    gap: 32px;
+    padding: 40px 24px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 768px) {
+  .banner-container {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr;
+
+    /*
+     * Much smaller than desktop.
+     * The Kindred frame controls the outer spacing.
+     */
+    gap: 24px;
+
+    padding: 32px 20px;
+  }
+
+  .banner-buttons {
+    width: fit-content;
+    max-width: 100%;
+
+    gap: 8px;
+
+    margin-top: 18px;
+  }
+
+  .banner-button-get-started,
+  .banner-button-how-it-works {
+    /*
+     * Smaller buttons only on mobile
+     */
+    padding: 9px 14px;
+
+    font-size: 13px;
+
+    min-width: 0;
+    width: auto;
+
+    white-space: nowrap;
+  }
+
+  /*
+   * Heading gets the entire first row.
+   */
+  .banner-content {
+    width: 100%;
+    min-width: 0;
+
+    display: block;
+
+    text-align: left;
+  }
+
+  .banner-content .heading-frame-header {
+    width: 100%;
+    max-width: none;
+
+    text-align: left;
+  }
+
+  .banner-content .heading-frame-header__step {
+    width: 100%;
+
+    text-align: left;
+  }
+
+  .banner-content .heading-frame-header__title {
+    width: 100%;
+
+    text-align: left;
+
+    /*
+     * Prevent weird character-by-character
+     * breaking.
+     */
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+  }
+
+  .banner-content .heading-frame-header__copy {
+    width: 100%;
+
+    text-align: left;
+  }
+
+  /*
+   * Visual becomes the second row.
+   */
+  .banner-visual {
+    width: 100%;
+    min-height: 275px;
+
+    border-radius: 14px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+  .banner-container {
+    gap: 20px;
+
+    /*
+     * Match the screenshot:
+     * content sits close to the frame edges.
+     */
+    padding: 28px 16px;
+  }
+
+  .banner-content {
+    width: 100%;
+  }
+
+  .banner-content .heading-frame-header {
+    width: 100%;
+  }
+
+  .banner-visual {
+    width: 100%;
+    min-height: 275px;
+  }
+
+  .connection-card {
+    width: 95px;
+  }
+
+  .card-image {
+    height: 68px;
+  }
+
+  .card-one {
+    top: 20px;
+    left: 12px;
+  }
+
+  .card-two {
+    top: 48px;
+    right: 12px;
+  }
+
+  .card-three {
+    bottom: 24px;
+    left: 42px;
+  }
+}
