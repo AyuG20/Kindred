@@ -1,6 +1,6 @@
 import './Heading.css';
 
-export const Heading = ({stepTitle, title, description}: {stepTitle: string, title: string, description: string}) => {
+export const Heading = ({stepTitle, title, description}: {stepTitle?: string, title: string, description: string}) => {
     return (
         <>
           <span className="heading-frame-header__step">

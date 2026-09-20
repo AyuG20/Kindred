@@ -1,11 +1,15 @@
 .kindred-card {
   width: 100%;
   max-width: 100%;
+  box-sizing: border-box;
+
   padding: 2rem;
   border-radius: 30px;
+
   background: var(--card);
-  border: 1px solid transparent;
-  box-shadow: 0 42px 80px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(35, 48, 42, 0.14);
+
+  box-shadow: 0 12px 30px rgba(35, 48, 42, 0.04);
 }
 
 .kindred-card--elevated {

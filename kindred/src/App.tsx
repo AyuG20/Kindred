@@ -3,16 +3,15 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Authenticate } from "./Pages/Authenticate/Authenticate";
 import { Interests } from "./Pages/Interests/Interests";
 import { ProfileDetails } from "./Pages/ProfileDetails/ProfileDetails";
-
-
 import { OnboardingRoute } from "./Routes/OnboardingRoute";
 import Home  from "./Pages/LandingPage/Home";
+import Discover from "./Pages/Discover/Discover";
 import { AppShell } from "./Layout/AppShell";
+import { useGetCurrentUserQuery } from "./Redux/Auth/authQueries";
 
 const App = () => {
-  return (
 
-    
+  return (
     <Routes>
 
       {/* Public */}
@@ -23,6 +22,7 @@ const App = () => {
 
       <Route element={<AppShell/>}>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="/discover" element={<Discover/>}/>
       </Route>
 
       {/* Onboarding */}

@@ -1,14 +1,19 @@
 import { requestInterceptor } from '../../interceptors/authInterceptor'
 
 export type AuthUser = {
-  id: string
+  _id: string
   name: string
   email: string
   role: 'user' | 'admin'
   onboardingStatus: 'INTERESTS' | 'PROFILE' | 'COMPLETED'
 }
 
+export type CurrentUserResponse = {
+  user: AuthUser;
+};
+
 export interface AuthResponse {
+  isAuthenticated: boolean;
   message: string;
   status: number;
   success: boolean;
@@ -61,3 +66,10 @@ export const logoutAuth = async (): Promise<void> => {
     method: 'POST',
   })
 }
+
+export const getCurrentUser = async (): Promise<CurrentUserResponse> => {
+  const response = await requestInterceptor<CurrentUserResponse>("/auth/me", {
+    method: "GET",
+  });
+  return response;
+};

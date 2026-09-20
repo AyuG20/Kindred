@@ -12,7 +12,7 @@ export const getOnboardingRoute = (
       return "/onboarding/profile-details";
 
     case "COMPLETED":
-      return "/dashboard";
+      return "/discover";
 
     default:
       return "/auth";

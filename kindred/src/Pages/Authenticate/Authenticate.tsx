@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { finishOnboarding, setAuthUser, startOnboarding } from "../../Redux/Auth/authSlice";
 import { authTexts } from "./authTexts";
 import "./Authenticate.css";
-import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus";
+import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus.ts";
 import {
   useLoginMutation,
   useSignupMutation,
@@ -27,7 +27,6 @@ export const Authenticate = () => {
   const navigate = useNavigate();
   const loginMutation = useLoginMutation();
   const registerMutation = useSignupMutation();
-
   const formTitle = isRegister ? authTexts.signUpTitle : authTexts.loginTitle;
 
   const formCopy = isRegister ? authTexts.signUpCopy : authTexts.loginCopy;

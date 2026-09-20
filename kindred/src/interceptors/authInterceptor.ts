@@ -3,6 +3,7 @@ import axios, {
   type AxiosRequestConfig,
   type AxiosRequestHeaders,
 } from "axios";
+import { ApiError } from "../Error/ApiError";
 
 const API_BASE_URL = "http://localhost:3000/api";
 
@@ -35,14 +36,16 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error: unknown) => {
     if (axios.isAxiosError(error)) {
-      const message =
-        error.response?.data?.message ?? error.message;
-
-      return Promise.reject(new Error(message));
+      return Promise.reject(
+        new ApiError(
+          error.response?.status ?? 500,
+          error.response?.data
+        )
+      );
     }
 
     return Promise.reject(new Error("Request failed"));
-  },
+  }
 );
 
 export const requestInterceptor = async <T>(

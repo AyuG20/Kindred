@@ -1,7 +1,7 @@
 import { requestInterceptor } from "../../interceptors/authInterceptor";
 
 export interface Interest{
-    id: string;
+    _id: string;
     name: string;
     category: string;
     emoji: string;
@@ -20,4 +20,15 @@ export const selectInterests = async(interestIds: string[]) : Promise<SelectInte
             method: 'PUT',
             data: { interestIds },
         });
+}
+
+// export const fetchUserInterests = async(userId:string): Promise<Interest> =>{
+//     return requestInterceptor<Interest>('/interests/me',{
+//         method: 'GET'
+//     })
+// }
+export const listInterests = async(): Promise<Interest[]> =>{
+    return requestInterceptor<Interest[]>('/interests/',{
+        method: 'GET'
+    })
 }
