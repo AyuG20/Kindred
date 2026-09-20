@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import { useAppSelector } from "../../Redux/hooks";
+import { useGetCurrentUserQuery } from "../../Redux/Auth/authQueries";
 
 export function Navbar() {
-    const isAuthenticated = false;
+ const { data, isLoading } = useGetCurrentUserQuery();
+
+const user = data?.user;
+const isAuthenticated = !!user;
   return (
     <>
       <nav className="navbar">
@@ -15,12 +20,12 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="navLinks">
+         { isAuthenticated && <div className="navLinks">
             <Link to="/discover">Discover</Link>
             <Link to="/connections">Connections</Link>
             <Link to="/groups">Groups</Link>
             <Link to="/messages">Messages</Link>
-          </div>
+          </div>}
 
           {/* Right side */}
           <div className="navbar-actions">

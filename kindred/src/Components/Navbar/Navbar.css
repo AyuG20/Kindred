@@ -1,6 +1,6 @@
 .navbar {
-  width: min(1000px, calc(100% - 2rem));
-  max-width: 1000px;
+  width: min(1500px, calc(100% - 2rem));
+  max-width: 1500px;
   min-height: 72px;
 
   margin-inline: auto;

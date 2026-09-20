@@ -5,7 +5,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../ProfileDetails/ProfileDetails.css";
 import { updateProfile } from "../../Redux/ProfileOnboarding/profileApi";
-import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus";
+import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus.ts";
 
 export function ProfileDetails() {
   const [bio, setBio] = useState("");
@@ -14,7 +14,6 @@ export function ProfileDetails() {
   const [profileFile, setProfileFile] = useState<File | null>(null);  
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 

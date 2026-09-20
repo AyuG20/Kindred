@@ -30,9 +30,11 @@ export default function Home() {
       <div className="steps-grid">
         {steps.map((step) => (
           <Card key={step.number} className="step-card">
-            <span className="step-card__number">{step.number}</span>
+            {/* <div> */}
+              <span className="step-card__number">{step.number}</span>
 
-            <h3 className="step-card__title">{step.title}</h3>
+              <h3 className="step-card__title">{step.title}</h3>
+            {/* </div> */}
 
             <p className="step-card__description">{step.description}</p>
           </Card>
