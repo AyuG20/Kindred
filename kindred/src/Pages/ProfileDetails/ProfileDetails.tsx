@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "../ProfileDetails/ProfileDetails.css";
 import { updateProfile } from "../../Redux/ProfileOnboarding/profileApi";
 import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus.ts";
+import { profileDetailsTexts } from "./profileDetailsTexts";
 
 export function ProfileDetails() {
   const [bio, setBio] = useState("");
@@ -32,7 +33,7 @@ export function ProfileDetails() {
 
  const handleContinue = async () => {
   if (!profileFile) {
-    setError("Profile picture required");
+    setError(profileDetailsTexts.profilePictureRequired);
     return;
   }
 
@@ -57,7 +58,7 @@ export function ProfileDetails() {
     setError(
       err instanceof Error
         ? err.message
-        : "Failed to update profile"
+        : profileDetailsTexts.updateFailed
     );
   } finally {
     setLoading(false);
@@ -69,9 +70,9 @@ export function ProfileDetails() {
       <div className="kindered-frame">
         <div className="pd-frame-header">
           <Heading
-            stepTitle=" Step 1 of 2 - Your Profile"
-            title="Add a few Details"
-            description="This is what others see on Discover."
+            stepTitle={profileDetailsTexts.stepTitle}
+            title={profileDetailsTexts.title}
+            description={profileDetailsTexts.description}
           />
         </div>
         <div className="profile-photo-section">
@@ -85,7 +86,7 @@ export function ProfileDetails() {
             {profileImage ? (
               <img
                 src={profileImage}
-                alt="Profile preview"
+                alt={profileDetailsTexts.profilePreviewAlt}
                 className="profile-photo__image"
               />
             ) : (
@@ -100,7 +101,7 @@ export function ProfileDetails() {
               handlePhotoClick();
             }}
           >
-            Add a photo
+            {profileDetailsTexts.addPhoto}
           </button>
 
           <input
@@ -116,24 +117,24 @@ export function ProfileDetails() {
         <div className="profile-details-form">
           {/* Bio */}
           <label className="profile-field">
-            <span className="profile-field__label">Bio</span>
+            <span className="profile-field__label">{profileDetailsTexts.bio}</span>
 
             <textarea
               className="profile-textarea"
               value={bio}
               onChange={(event) => setBio(event.target.value)}
               rows={4}
-              placeholder="Tell people a little about yourself..."
+              placeholder={profileDetailsTexts.bioPlaceholder}
             />
           </label>
 
           {/* Location */}
           <Input
-            label="Location"
+            label={profileDetailsTexts.location}
             type="text"
             value={location}
             onChange={(event) => setLocation(event.target.value)}
-            placeholder="Kolkata, India"
+            placeholder={profileDetailsTexts.locationPlaceholder}
           />
 
           {/* Footer */}
@@ -148,7 +149,7 @@ export function ProfileDetails() {
               }
             }
             >
-             Suggest my interests
+             {profileDetailsTexts.suggestInterests}
             </Button>
           </div>
         </div>

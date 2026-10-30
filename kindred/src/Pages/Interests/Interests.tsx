@@ -10,6 +10,7 @@ import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus.ts";
 import { useListInterest } from "../../Redux/Interests/interestQueries";
 import type { Interest } from "../../Redux/Interests/interestApi";
 import { toggleInterest } from "../../Helper/ToggleInterest";
+import { interestsTexts } from "./interestsTexts";
 
 export const Interests = () => {
   const [selectInterests, setSelectInterests] = useState<string[]>([]);
@@ -68,16 +69,16 @@ export const Interests = () => {
     <div className="kindered-frame">
       <div className="interest-frame-header">
         <Heading
-          stepTitle="Step 2 of 2 - Your Interests"
-          title="Confirm your interests"
-          description="Select your interests to help us personalize your experience."
+          stepTitle={interestsTexts.stepTitle}
+          title={interestsTexts.title}
+          description={interestsTexts.description}
         />
       </div>
 
       <div className="interest-section">
-        {isLoading && <p>Loading interests...</p>}
+        {isLoading && <p>{interestsTexts.loading}</p>}
 
-        {isError && <p>Failed to load interests. Please try again.</p>}
+        {isError && <p>{interestsTexts.loadError}</p>}
 
         {!isLoading &&
           !isError &&
@@ -130,7 +131,7 @@ export const Interests = () => {
           size="md"
           className="profile-back-button"
         >
-          Back
+          {interestsTexts.back}
         </Button>
 
         <Button
@@ -139,7 +140,7 @@ export const Interests = () => {
           onClick={handleContinue}
           disabled={selectInterests.length < 3}
         >
-          Finish & explore Kindred
+          {interestsTexts.finish}
         </Button>
       </div>
     </div>

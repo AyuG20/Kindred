@@ -1,20 +1,15 @@
 import { Heading } from "../../Components/Heading/Heading";
 import { useDiscoveredUsers } from "../../Redux/Discover/discoverQueries";
 import {
-  useAcceptConnectionRequest,
   useSendConnectionRequest,
-  useUndoConnectionRequest,
+  useConnectionActions,
 } from "../../Redux/Connection/connectionQueries";
 import { Button } from "../../Components/Button/Button";
 import { useState } from "react";
 import "./Discover.css";
 import { Card } from "../../Components/Card/Card";
-import { useQueryClient } from "@tanstack/react-query";
-import type {
-  DiscoveredUsers,
-  DiscoverResponse,
-} from "../../Redux/Discover/discoverApi";
 import { useGetCurrentUserQuery } from "../../Redux/Auth/authQueries";
+import { discoverTexts } from "./discoverTexts";
 
 export default function Discover() {
   const [selectedInterest, setSelectedInterest] = useState<string | undefined>(
@@ -27,11 +22,14 @@ export default function Discover() {
 
   const currentUserId = UserId?.user?._id;
 
-  const queryClient = useQueryClient();
-
   const sendConnectionRequest = useSendConnectionRequest();
-  const undoConnectionRequest = useUndoConnectionRequest();
-  const acceptConnectionRequest = useAcceptConnectionRequest();
+  const {
+    acceptConnect,
+    undoConnect,
+    updateConnectionInCache,
+    isAccepting,
+    isUndoing,
+  } = useConnectionActions();
 
   const handleInterestFilter = (id: string) => {
     setSelectedInterest((prev) => {
@@ -41,32 +39,6 @@ export default function Discover() {
 
       return id;
     });
-  };
-
-  const updateConnectionInCache = (
-    userId: string,
-    connectionStatus: DiscoveredUsers["connectionStatus"],
-    requestedBy: string | null,
-  ) => {
-    queryClient.setQueriesData<DiscoverResponse>(
-      { queryKey: ["discoveredUsers"] },
-      (oldData) => {
-        if (!oldData) return oldData;
-
-        return {
-          ...oldData,
-          users: oldData.users.map((user) =>
-            user._id === userId
-              ? {
-                  ...user,
-                  connectionStatus,
-                  requestedBy,
-                }
-              : user,
-          ),
-        };
-      },
-    );
   };
 
   const handleConnect = (userId: string) => {
@@ -80,37 +52,17 @@ export default function Discover() {
     });
   };
 
-  const undoConnect = (userId: string) => {
-    undoConnectionRequest.mutate(userId, {
-      onSuccess: () => updateConnectionInCache(userId, null, null),
-    });
-  };
-
-  const acceptConnect = (userId: string) => {
-    acceptConnectionRequest.mutate(userId, {
-      onSuccess: (response) =>
-        updateConnectionInCache(
-          userId,
-          response.connection.status,
-          response.connection.requestedBy,
-        ),
-        onError: (error) => {
-          console.error("Error accepting connection request:", error);
-        }
-    });
-  };
-
   return (
     <>
       <Heading
-        title="Discover"
-        description="Sorted by how much you have in common"
+        title={discoverTexts.title}
+        description={discoverTexts.description}
       />
       {/* Loading */}
       {isLoading && (
         <div className="discover-state discover-state--loading">
           <div className="discover-spinner" />
-          <p>Finding people you might connect with...</p>
+          <p>{discoverTexts.loading}</p>
         </div>
       )}
 
@@ -118,8 +70,8 @@ export default function Discover() {
       {isError && (
         <div className="discover-state discover-state--error">
           <div className="discover-state-icon">!</div>
-          <h3>Couldn't load Discover</h3>
-          <p>We couldn't find people right now. Please try again.</p>
+          <h3>{discoverTexts.loadErrorTitle}</h3>
+          <p>{discoverTexts.loadErrorDescription}</p>
         </div>
       )}
       {!isLoading && !isError && (
@@ -139,7 +91,7 @@ export default function Discover() {
               }`}
             />
 
-            <span>All</span>
+            <span>{discoverTexts.allInterests}</span>
           </Button>
           {data?.currentUserInterests.map((interest) => {
             const isSelected = selectedInterest === interest._id;
@@ -200,7 +152,7 @@ export default function Discover() {
                 {/* Shared interests */}
                 <div className="discovery-match">
                   <span className="discovery-match-icon">🧑‍🤝‍🧑</span>
-                  <span>{user.matchCount} shared</span>
+                  <span>{discoverTexts.shared(user.matchCount)}</span>
                 </div>
 
                 {/* Bio */}
@@ -215,10 +167,10 @@ export default function Discover() {
                       variant="primary"
                       size="md"
                       className="discovery-connect"
-                      disabled={acceptConnectionRequest.isPending}
+                      disabled={isAccepting}
                       onClick={() => acceptConnect(user._id)}
                     >
-                      Accept
+                      {discoverTexts.accept}
                     </Button>
 
                     <Button
@@ -227,7 +179,7 @@ export default function Discover() {
                       size="md"
                       className="discovery-reject"
                       onClick={() => {}}
-                      aria-label="Reject connection request"
+                      aria-label={discoverTexts.rejectAriaLabel}
                     >
                       ×
                     </Button>
@@ -246,7 +198,7 @@ export default function Discover() {
                     }`}
                     disabled={
                       sendConnectionRequest.isPending ||
-                      undoConnectionRequest.isPending ||
+                      isUndoing ||
                       user.connectionStatus === "connected"
                     }
                     onClick={() =>
@@ -256,10 +208,10 @@ export default function Discover() {
                     }
                   >
                     {user.connectionStatus === "pending"
-                      ? "Pending"
+                      ? discoverTexts.pending
                       : user.connectionStatus === "connected"
-                        ? "Connected"
-                        : "Connect"}
+                        ? discoverTexts.connected
+                        : discoverTexts.connect}
                   </Button>
                 )}
               </div>

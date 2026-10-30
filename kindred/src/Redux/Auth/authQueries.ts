@@ -5,7 +5,6 @@ import {
   signupAuth,
   type AuthResponse,
   type CurrentUserResponse,
-  type AuthUser,
   type LoginPayload,
   type SignupPayload,
 } from "./authApi.ts";

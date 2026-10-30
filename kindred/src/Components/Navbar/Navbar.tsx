@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useAppSelector } from "../../Redux/hooks";
 import { useGetCurrentUserQuery } from "../../Redux/Auth/authQueries";
+import { navbarTexts } from "./navbarTexts";
 
 export function Navbar() {
  const { data, isLoading } = useGetCurrentUserQuery();
@@ -16,32 +17,32 @@ const isAuthenticated = !!user;
           {/* Brand */}
           <Link to="/" className="brand-tag">
             <span className="brand-icon">.</span>
-            <span className="brand-name">Kindred</span>
+            <span className="brand-name">{navbarTexts.brand}</span>
           </Link>
 
           {/* Desktop Navigation */}
          { isAuthenticated && <div className="navLinks">
-            <Link to="/discover">Discover</Link>
-            <Link to="/connections">Connections</Link>
-            <Link to="/groups">Groups</Link>
-            <Link to="/messages">Messages</Link>
+            <Link to="/discover">{navbarTexts.discover}</Link>
+            <Link to="/connections">{navbarTexts.connections}</Link>
+            <Link to="/groups">{navbarTexts.groups}</Link>
+            <Link to="/messages">{navbarTexts.messages}</Link>
           </div>}
 
           {/* Right side */}
           <div className="navbar-actions">
             {!isAuthenticated ? (
               <>
-                <Link to="/auth">Login</Link>
-                <Link to="/auth">Signup</Link>
+                <Link to="/auth">{navbarTexts.login}</Link>
+                <Link to="/auth">{navbarTexts.signup}</Link>
               </>
             ) : (
               <>
                 <Link to="/profile" className="profile-btn">
-                  Profile
+                  {navbarTexts.profile}
                 </Link>
 
                 <button type="button" className="logout-btn">
-                  Logout
+                  {navbarTexts.logout}
                 </button>
               </>
             )}
@@ -52,10 +53,10 @@ const isAuthenticated = !!user;
 
       {/* Mobile Bottom Navigation */}
       <nav className="mobile-bottom-nav">
-        <Link to="/discover">Discover</Link>
-        <Link to="/connections">Connections</Link>
-        <Link to="/groups">Groups</Link>
-        <Link to="/messages">Messages</Link>
+        <Link to="/discover">{navbarTexts.discover}</Link>
+        <Link to="/connections">{navbarTexts.connections}</Link>
+        <Link to="/groups">{navbarTexts.groups}</Link>
+        <Link to="/messages">{navbarTexts.messages}</Link>
       </nav>
     </>
   );

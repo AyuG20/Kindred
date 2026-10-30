@@ -1,5 +1,6 @@
 import { Button } from "../../Components/Button/Button";
 import { Heading } from "../../Components/Heading/Heading";
+import { bannerTexts } from "./bannerTexts";
 import "./Banner.css";
 
 export default function Banner() {
@@ -16,39 +17,39 @@ export default function Banner() {
       <section className="banner-container">
         <div className="banner-content">
           <Heading
-            stepTitle="Interest-based connections"
-            title="Find your people,thread by thread."
-            description="Kindred matches you with people who care about the same things you do — from trail running to ceramics to late-night debugging. Set your interests, browse who's nearby, connect."
+            stepTitle={bannerTexts.stepTitle}
+            title={bannerTexts.title}
+            description={bannerTexts.description}
           />
           <div className="banner-buttons">
             <Button variant="primary" className="banner-button-get-started">
-              Get Started
+              {bannerTexts.getStarted}
             </Button>
             <Button onClick={()=>handleHowItWorks()} variant="secondary" id="how-it-works" className="banner-button-how-it-works">
-              See how it works
+              {bannerTexts.howItWorks}
             </Button>
           </div>
         </div>
         <div className="banner-visual">
           <div className="connection-card card-one">
             <div className="card-image">
-              <img src="/images/trail-running.jpg" alt="Trail running" />
+              <img src="/images/trail-running.jpg" alt={bannerTexts.trailRunning} />
             </div>
-            <span>Trail running</span>
+              <span>{bannerTexts.trailRunning}</span>
           </div>
 
           <div className="connection-card card-two">
             <div className="card-image">
-              <img src="/images/ceramics.jpg" alt="Ceramics" />
+              <img src="/images/ceramics.jpg" alt={bannerTexts.ceramics} />
             </div>
-            <span>Ceramics</span>
+              <span>{bannerTexts.ceramics}</span>
           </div>
 
           <div className="connection-card card-three">
             <div className="card-image">
-              <img src="/images/board-games.jpg" alt="Board games" />
+              <img src="/images/board-games.jpg" alt={bannerTexts.boardGames} />
             </div>
-            <span>Board games</span>
+              <span>{bannerTexts.boardGames}</span>
           </div>
 
           <div className="connection-line line-one" />
