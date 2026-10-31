@@ -6,7 +6,7 @@ import {
   useConnectionActions,
   useConnectedUsers,
   useReceivedConnectionRequests,
-} from "../../Redux/Connection/connectionQueries";
+} from "../../Api/Connection/connectionQueries";
 import { connectionsTexts } from "./connectionsTexts";
 import "./Connections.css";
 

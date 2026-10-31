@@ -7,8 +7,8 @@ import { Heading } from "../../Components/Heading/Heading";
 import { finishOnboarding } from "../../Redux/Auth/authSlice";
 import { selectedInterests } from "../../Redux/Interests/InterestSlice";
 import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus.ts";
-import { useListInterest } from "../../Redux/Interests/interestQueries";
-import type { Interest } from "../../Redux/Interests/interestApi";
+import { useListInterest } from "../../Api/Interests/interestQueries";
+import type { Interest } from "../../Api/Interests/interestApi";
 import { toggleInterest } from "../../Helper/ToggleInterest";
 import { interestsTexts } from "./interestsTexts";
 

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { selectInterests, type SelectInterestsResponse, type Interest} from "./interestApi";
+import { selectInterests, type SelectInterestsResponse, type Interest} from "../../Api/Interests/interestApi";
 
 
 

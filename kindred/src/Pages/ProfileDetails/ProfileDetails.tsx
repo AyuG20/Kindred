@@ -4,7 +4,7 @@ import { Input } from "../../Components/Input/Input";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../ProfileDetails/ProfileDetails.css";
-import { updateProfile } from "../../Redux/ProfileOnboarding/profileApi";
+import { updateProfile } from "../../Api/ProfileOnboarding/profileApi";
 import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus.ts";
 import { profileDetailsTexts } from "./profileDetailsTexts";
 

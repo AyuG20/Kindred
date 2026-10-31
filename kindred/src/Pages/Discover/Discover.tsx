@@ -1,14 +1,14 @@
 import { Heading } from "../../Components/Heading/Heading";
-import { useDiscoveredUsers } from "../../Redux/Discover/discoverQueries";
+import { useDiscoveredUsers } from "../../Api/Discover/discoverQueries";
 import {
   useSendConnectionRequest,
   useConnectionActions,
-} from "../../Redux/Connection/connectionQueries";
+} from "../../Api/Connection/connectionQueries";
 import { Button } from "../../Components/Button/Button";
 import { useState } from "react";
 import "./Discover.css";
 import { Card } from "../../Components/Card/Card";
-import { useGetCurrentUserQuery } from "../../Redux/Auth/authQueries";
+import { useGetCurrentUserQuery } from "../../Api/Auth/authQueries";
 import { discoverTexts } from "./discoverTexts";
 
 export default function Discover() {

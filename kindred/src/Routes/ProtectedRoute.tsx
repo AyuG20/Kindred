@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../Redux/hooks";
-import { useGetCurrentUserQuery } from "../Redux/Auth/authQueries";
+import { useGetCurrentUserQuery } from "../Api/Auth/authQueries";
 import { logout, setAuthUser } from "../Redux/Auth/authSlice";
 
 export const ProtectedRoute = () => {
