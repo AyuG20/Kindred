@@ -10,7 +10,7 @@ import { getOnboardingRoute } from "../../Helper/GetOnboardingStatus.ts";
 import {
   useLoginMutation,
   useSignupMutation,
-} from "../../Redux/Auth/authQueries";
+} from "../../Api/Auth/authQueries";
 
 export const Authenticate = () => {
   const [isRegister, setIsRegister] = useState(false);

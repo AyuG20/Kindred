@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { useAppSelector } from "../../Redux/hooks";
-import { useGetCurrentUserQuery } from "../../Redux/Auth/authQueries";
+import { useGetCurrentUserQuery } from "../../Api/Auth/authQueries";
 import { navbarTexts } from "./navbarTexts";
 
 export function Navbar() {
